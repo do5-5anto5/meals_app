@@ -10,11 +10,11 @@ class CategoryGridItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(16 ),
       decoration: BoxDecoration(
           gradient: LinearGradient(colors: [
-            category.color.withAlpha(185),
-            category.color.withAlpha(225),
+            category.color.withAlpha(140),
+            category.color.withAlpha(229),
           ],
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
