@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:meals_app/widgets/switch_list_tile_custom.dart';
+
 // import 'package:meals_app/screens/tabs.dart';
 // import 'package:meals_app/widgets/drawer.dart';
 
@@ -11,6 +13,9 @@ class FiltersScreen extends StatefulWidget {
 
 class _FiltersScreenState extends State<FiltersScreen> {
   var _glutenFreeFilterSet = false;
+  var _lactoseFreeFilterSet = false;
+  var _vegetarianFilterSet = false;
+  var _veganFilterSet = false;
 
   @override
   Widget build(BuildContext context) {
@@ -29,27 +34,44 @@ class _FiltersScreenState extends State<FiltersScreen> {
       // ),
       body: Column(
         children: [
-          SwitchListTile(
+          SwitchListTileCustom(
             value: _glutenFreeFilterSet,
+            title: 'Gluten-free',
+            subtitle: 'Only include gluten-free meals.',
             onChanged: (isChecked) {
               setState(() {
                 _glutenFreeFilterSet = isChecked;
               });
             },
-            title: Text(
-              'Gluten-free',
-              style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                color: Theme.of(context).colorScheme.onSurface,
-              ),
-            ),
-            subtitle: Text(
-              'Only include gluten-free meals.',
-              style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                color: Theme.of(context).colorScheme.onSurface,
-              ),
-            ),
-            activeColor: Theme.of(context).colorScheme.tertiary,
-            contentPadding: const EdgeInsets.only(left: 34, right: 22),
+          ),SwitchListTileCustom(
+            value: _lactoseFreeFilterSet,
+            title: 'Lactose-free',
+            subtitle: 'Only include lactose-free meals.',
+            onChanged: (isChecked) {
+              setState(() {
+                _lactoseFreeFilterSet = isChecked;
+              });
+            },
+          ),
+          SwitchListTileCustom(
+            value: _vegetarianFilterSet,
+            title: 'Vegetarian',
+            subtitle: 'Only include vegetarian meals.',
+            onChanged: (isChecked) {
+              setState(() {
+                _vegetarianFilterSet = isChecked;
+              });
+            },
+          ),
+          SwitchListTileCustom(
+            value: _veganFilterSet,
+            title: 'Vegan',
+            subtitle: 'Only include vegan meals.',
+            onChanged: (isChecked) {
+              setState(() {
+                _veganFilterSet = isChecked;
+              });
+            },
           ),
         ],
       ),
