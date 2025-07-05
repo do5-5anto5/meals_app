@@ -28,12 +28,25 @@ class MealDetailsScreen extends ConsumerWidget {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(
-                    wasAdded ? 'Meal added as a favorite' : 'Meal removed from favorites.',
+                    wasAdded
+                        ? 'Meal added as a favorite'
+                        : 'Meal removed from favorites.',
                   ),
                 ),
               );
             },
-            icon: Icon(isFavorite ? Icons.star : Icons.star_border),
+            icon: AnimatedSwitcher(
+              duration: const Duration(milliseconds: 300),
+              transitionBuilder:
+                  (child, animation) => RotationTransition(
+                    turns: Tween<double>(begin: 0.8, end: 1.0).animate(animation),
+                    child: child,
+                  ),
+              child: Icon(
+                isFavorite ? Icons.star : Icons.star_border,
+                key: ValueKey(isFavorite),
+              ),
+            ),
           ),
         ],
       ),
@@ -41,11 +54,14 @@ class MealDetailsScreen extends ConsumerWidget {
         children: [
           Column(
             children: [
-              Image.network(
-                meal.imageUrl,
-                height: 300,
-                width: double.infinity,
-                fit: BoxFit.cover,
+              Hero(
+                tag: meal.id,
+                child: Image.network(
+                  meal.imageUrl,
+                  height: 300,
+                  width: double.infinity,
+                  fit: BoxFit.cover,
+                ),
               ),
               const SizedBox(height: 14),
               Text(
