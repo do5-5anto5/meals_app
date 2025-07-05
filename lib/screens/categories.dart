@@ -7,10 +7,7 @@ import '../models/meal.dart';
 import '../widgets/category_item.dart';
 
 class CategoriesScreen extends StatefulWidget {
-  const CategoriesScreen({
-    super.key,
-    required this.availableMeals,
-  });
+  const CategoriesScreen({super.key, required this.availableMeals});
 
   final List<Meal> availableMeals;
 
@@ -18,7 +15,8 @@ class CategoriesScreen extends StatefulWidget {
   State<CategoriesScreen> createState() => _CategoriesScreenState();
 }
 
-class _CategoriesScreenState extends State<CategoriesScreen> with SingleTickerProviderStateMixin{
+class _CategoriesScreenState extends State<CategoriesScreen>
+    with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
 
   @override
@@ -31,6 +29,8 @@ class _CategoriesScreenState extends State<CategoriesScreen> with SingleTickerPr
       lowerBound: 0,
       upperBound: 1,
     );
+
+    _animationController.forward();
   }
 
   @override
@@ -50,7 +50,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> with SingleTickerPr
         builder:
             (ctx) => MealsScreen(
               title: category.title,
-              availableMeals: filteredMeals
+              availableMeals: filteredMeals,
             ),
       ),
     );
@@ -58,9 +58,13 @@ class _CategoriesScreenState extends State<CategoriesScreen> with SingleTickerPr
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(24),
+    return AnimatedBuilder(
+      animation: _animationController,
+      builder: (context, child) => Padding(
+          padding: EdgeInsets.only(top: 100 - 100 * _animationController.value),
+          child: child),
       child: GridView(
+        padding: const EdgeInsets.all(24),
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 2,
           childAspectRatio: 3 / 2,
